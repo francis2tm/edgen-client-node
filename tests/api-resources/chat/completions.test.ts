@@ -1,4 +1,4 @@
-// File generated from our OpenAPI spec by Stainless.
+
 
 import Edgen from 'edgen';
 import { Response } from 'node-fetch';
