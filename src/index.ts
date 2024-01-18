@@ -1,4 +1,4 @@
-// File generated from our OpenAPI spec by Stainless.
+
 
 import * as Core from './core';
 import * as Pagination from './pagination';
@@ -111,7 +111,7 @@ export class Edgen extends Core.APIClient {
     if (apiKey === undefined) {
       apiKey = '';
       console.log(
-      // throw new Errors.OpenAIError(
+      // throw new Errors.EdgenError(
         "The OPENAI_API_KEY environment variable is missing or empty; either provide it, or instantiate the OpenAI client with an apiKey option, like new OpenAI({ apiKey: 'My API Key' }).",
       );
     }
@@ -124,7 +124,7 @@ export class Edgen extends Core.APIClient {
     };
 
     if (!options.dangerouslyAllowBrowser && Core.isRunningInBrowser()) {
-      throw new Errors.OpenAIError(
+      throw new Errors.EdgenError(
         "It looks like you're running in a browser-like environment.\n\nThis is disabled by default, as it risks exposing your secret API credentials to attackers.\nIf you understand the risks and have appropriate mitigations in place,\nyou can set the `dangerouslyAllowBrowser` option to `true`, e.g.,\n\nnew OpenAI({ apiKey, dangerouslyAllowBrowser: true });\n\nhttps://help.openai.com/en/articles/5112595-best-practices-for-api-key-safety\n",
       );
     }
@@ -164,7 +164,7 @@ export class Edgen extends Core.APIClient {
 
   static Edgen = this;
 
-  static OpenAIError = Errors.OpenAIError;
+  static EdgenError = Errors.EdgenError;
   static APIError = Errors.APIError;
   static APIConnectionError = Errors.APIConnectionError;
   static APIConnectionTimeoutError = Errors.APIConnectionTimeoutError;
@@ -180,7 +180,7 @@ export class Edgen extends Core.APIClient {
 }
 
 export const {
-  OpenAIError,
+  EdgenError,
   APIError,
   APIConnectionError,
   APIConnectionTimeoutError,

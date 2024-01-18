@@ -1,5 +1,5 @@
 import { ReadableStream, type Response } from './_shims/index';
-import { OpenAIError } from './error';
+import { EdgenError } from './error';
 
 import { APIError } from 'edgen/error';
 
@@ -28,7 +28,7 @@ export class Stream<Item> implements AsyncIterable<Item> {
     async function* iterMessages(): AsyncGenerator<ServerSentEvent, void, unknown> {
       if (!response.body) {
         controller.abort();
-        throw new OpenAIError(`Attempted to iterate over a response with no body`);
+        throw new EdgenError(`Attempted to iterate over a response with no body`);
       }
 
       const lineDecoder = new LineDecoder();
@@ -330,7 +330,7 @@ class LineDecoder {
         return Buffer.from(bytes).toString();
       }
 
-      throw new OpenAIError(
+      throw new EdgenError(
         `Unexpected: received non-Uint8Array (${bytes.constructor.name}) stream chunk in an environment with a global "Buffer" defined, which this library assumes to be Node. Please report this error.`,
       );
     }
@@ -342,14 +342,14 @@ class LineDecoder {
         return this.textDecoder.decode(bytes);
       }
 
-      throw new OpenAIError(
+      throw new EdgenError(
         `Unexpected: received non-Uint8Array/ArrayBuffer (${
           (bytes as any).constructor.name
         }) in a web platform. Please report this error.`,
       );
     }
 
-    throw new OpenAIError(
+    throw new EdgenError(
       `Unexpected: neither Buffer nor TextDecoder are available as globals. Please report this error.`,
     );
   }

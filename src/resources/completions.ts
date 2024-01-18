@@ -1,4 +1,4 @@
-// File generated from our OpenAPI spec by Stainless.
+
 
 import * as Core from 'edgen/core';
 import { APIPromise } from 'edgen/core';

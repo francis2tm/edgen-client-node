@@ -8,7 +8,7 @@ import {
   type ChatCompletionCreateParams,
   type ChatCompletionTool,
 } from 'edgen/resources/chat/completions';
-import { APIUserAbortError, OpenAIError } from 'edgen/error';
+import { APIUserAbortError, EdgenError } from 'edgen/error';
 import {
   type RunnableFunction,
   isRunnableFunctionWithParse,
@@ -34,11 +34,11 @@ export abstract class AbstractChatCompletionRunner<
 
   #connectedPromise: Promise<void>;
   #resolveConnectedPromise: () => void = () => {};
-  #rejectConnectedPromise: (error: OpenAIError) => void = () => {};
+  #rejectConnectedPromise: (error: EdgenError) => void = () => {};
 
   #endPromise: Promise<void>;
   #resolveEndPromise: () => void = () => {};
-  #rejectEndPromise: (error: OpenAIError) => void = () => {};
+  #rejectEndPromise: (error: EdgenError) => void = () => {};
 
   #listeners: { [Event in keyof Events]?: ListenersForEvent<Events, Event> } = {};
 
@@ -210,7 +210,7 @@ export abstract class AbstractChatCompletionRunner<
   async finalChatCompletion(): Promise<ChatCompletion> {
     await this.done();
     const completion = this._chatCompletions[this._chatCompletions.length - 1];
-    if (!completion) throw new OpenAIError('stream ended without producing a ChatCompletion');
+    if (!completion) throw new EdgenError('stream ended without producing a ChatCompletion');
     return completion;
   }
 
@@ -235,7 +235,7 @@ export abstract class AbstractChatCompletionRunner<
         return { ...message, content: message.content ?? null };
       }
     }
-    throw new OpenAIError('stream ended without producing a ChatCompletionMessage with role=assistant');
+    throw new EdgenError('stream ended without producing a ChatCompletionMessage with role=assistant');
   }
 
   /**
@@ -331,16 +331,16 @@ export abstract class AbstractChatCompletionRunner<
       this.#aborted = true;
       return this._emit('abort', error);
     }
-    if (error instanceof OpenAIError) {
+    if (error instanceof EdgenError) {
       return this._emit('error', error);
     }
     if (error instanceof Error) {
-      const openAIError: OpenAIError = new OpenAIError(error.message);
+      const openAIError: EdgenError = new EdgenError(error.message);
       // @ts-ignore
       openAIError.cause = error;
       return this._emit('error', openAIError);
     }
-    return this._emit('error', new OpenAIError(String(error)));
+    return this._emit('error', new EdgenError(String(error)));
   };
 
   protected _emit<Event extends keyof Events>(event: Event, ...args: EventParameters<Events, Event>) {
@@ -374,7 +374,7 @@ export abstract class AbstractChatCompletionRunner<
     if (event === 'error') {
       // NOTE: _emit('error', error) should only be called from #handleError().
 
-      const error = args[0] as OpenAIError;
+      const error = args[0] as EdgenError;
       if (!this.#catchingPromiseCreated && !listeners?.length) {
         // Trigger an unhandled rejection if the user hasn't registered any error handlers.
         // If you are seeing stack traces here, make sure to handle errors via either:
@@ -411,7 +411,7 @@ export abstract class AbstractChatCompletionRunner<
 
   #validateParams(params: ChatCompletionCreateParams): void {
     if (params.n != null && params.n > 1) {
-      throw new OpenAIError(
+      throw new EdgenError(
         'ChatCompletion convenience helpers only support n=1 at this time. To use n>1, please use chat.completions.create() directly.',
       );
     }
@@ -490,7 +490,7 @@ export abstract class AbstractChatCompletionRunner<
       );
       const message = chatCompletion.choices[0]?.message;
       if (!message) {
-        throw new OpenAIError(`missing message in ChatCompletion response`);
+        throw new EdgenError(`missing message in ChatCompletion response`);
       }
       if (!message.function_call) return;
       const { name, arguments: args } = message.function_call;
@@ -585,7 +585,7 @@ export abstract class AbstractChatCompletionRunner<
       );
       const message = chatCompletion.choices[0]?.message;
       if (!message) {
-        throw new OpenAIError(`missing message in ChatCompletion response`);
+        throw new EdgenError(`missing message in ChatCompletion response`);
       }
       if (!message.tool_calls) {
         return;
@@ -675,7 +675,7 @@ export interface AbstractChatCompletionRunnerEvents {
   finalFunctionCall: (functionCall: ChatCompletionMessage.FunctionCall) => void;
   functionCallResult: (content: string) => void;
   finalFunctionCallResult: (content: string) => void;
-  error: (error: OpenAIError) => void;
+  error: (error: EdgenError) => void;
   abort: (error: APIUserAbortError) => void;
   end: () => void;
   totalUsage: (usage: CompletionUsage) => void;

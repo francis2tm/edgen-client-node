@@ -1,10 +1,9 @@
-// File generated from our OpenAPI spec by Stainless.
 
 import { castToError, Headers } from './core';
 
-export class OpenAIError extends Error {}
+export class EdgenError extends Error {}
 
-export class APIError extends OpenAIError {
+export class APIError extends EdgenError {
   readonly status: number | undefined;
   readonly headers: Headers | undefined;
   readonly error: Object | undefined;

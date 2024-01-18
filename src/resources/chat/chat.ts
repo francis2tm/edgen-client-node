@@ -1,4 +1,4 @@
-// File generated from our OpenAPI spec by Stainless.
+
 
 import { APIResource } from 'edgen/resource';
 import * as CompletionsAPI from 'edgen/resources/chat/completions';

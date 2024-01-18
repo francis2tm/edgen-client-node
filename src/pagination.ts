@@ -1,4 +1,4 @@
-// File generated from our OpenAPI spec by Stainless.
+
 
 import { AbstractPage, Response, APIClient, FinalRequestOptions, PageInfo } from './core';
 

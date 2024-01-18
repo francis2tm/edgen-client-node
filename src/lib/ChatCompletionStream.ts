@@ -1,5 +1,5 @@
 import * as Core from 'edgen/core';
-import { OpenAIError, APIUserAbortError } from 'edgen/error';
+import { EdgenError, APIUserAbortError } from 'edgen/error';
 import {
   Completions,
   type ChatCompletion,
@@ -78,11 +78,11 @@ export class ChatCompletionStream
   }
   #endRequest(): ChatCompletion {
     if (this.ended) {
-      throw new OpenAIError(`stream has ended, this shouldn't happen`);
+      throw new EdgenError(`stream has ended, this shouldn't happen`);
     }
     const snapshot = this.#currentChatCompletionSnapshot;
     if (!snapshot) {
-      throw new OpenAIError(`request ended without sending any chunks`);
+      throw new EdgenError(`request ended without sending any chunks`);
     }
     this.#currentChatCompletionSnapshot = undefined;
     return finalizeChatCompletion(snapshot);
@@ -252,14 +252,14 @@ function finalizeChatCompletion(snapshot: ChatCompletionSnapshot): ChatCompletio
   return {
     id,
     choices: choices.map(({ message, finish_reason, index, logprobs }): ChatCompletion.Choice => {
-      if (!finish_reason) throw new OpenAIError(`missing finish_reason for choice ${index}`);
+      if (!finish_reason) throw new EdgenError(`missing finish_reason for choice ${index}`);
       const { content = null, function_call, tool_calls } = message;
       const role = message.role as 'assistant'; // this is what we expect; in theory it could be different which would make our types a slight lie but would be fine.
-      if (!role) throw new OpenAIError(`missing role for choice ${index}`);
+      if (!role) throw new EdgenError(`missing role for choice ${index}`);
       if (function_call) {
         const { arguments: args, name } = function_call;
-        if (args == null) throw new OpenAIError(`missing function_call.arguments for choice ${index}`);
-        if (!name) throw new OpenAIError(`missing function_call.name for choice ${index}`);
+        if (args == null) throw new EdgenError(`missing function_call.arguments for choice ${index}`);
+        if (!name) throw new EdgenError(`missing function_call.name for choice ${index}`);
         return {
           message: { content, function_call: { arguments: args, name }, role },
           finish_reason,
@@ -279,15 +279,15 @@ function finalizeChatCompletion(snapshot: ChatCompletionSnapshot): ChatCompletio
               const { function: fn, type, id } = tool_call;
               const { arguments: args, name } = fn || {};
               if (id == null)
-                throw new OpenAIError(`missing choices[${index}].tool_calls[${i}].id\n${str(snapshot)}`);
+                throw new EdgenError(`missing choices[${index}].tool_calls[${i}].id\n${str(snapshot)}`);
               if (type == null)
-                throw new OpenAIError(`missing choices[${index}].tool_calls[${i}].type\n${str(snapshot)}`);
+                throw new EdgenError(`missing choices[${index}].tool_calls[${i}].type\n${str(snapshot)}`);
               if (name == null)
-                throw new OpenAIError(
+                throw new EdgenError(
                   `missing choices[${index}].tool_calls[${i}].function.name\n${str(snapshot)}`,
                 );
               if (args == null)
-                throw new OpenAIError(
+                throw new EdgenError(
                   `missing choices[${index}].tool_calls[${i}].function.arguments\n${str(snapshot)}`,
                 );
 
