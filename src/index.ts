@@ -110,10 +110,6 @@ export class Edgen extends Core.APIClient {
   }: ClientOptions = {}) {
     if (apiKey === undefined) {
       apiKey = '';
-      console.log(
-      // throw new Errors.EdgenError(
-        "The EDGEN_API_KEY environment variable is missing or empty; either provide it, or instantiate the OpenAI client with an apiKey option, like new OpenAI({ apiKey: 'My API Key' }).",
-      );
     }
 
     const options: ClientOptions = {
@@ -145,6 +141,7 @@ export class Edgen extends Core.APIClient {
   completions: API.Completions = new API.Completions(this);
   chat: API.Chat = new API.Chat(this);
   audio: API.Audio = new API.Audio(this);
+  misc: API.Misc = new API.Misc(this);
 
   protected override defaultQuery(): Core.DefaultQuery | undefined {
     return this._options.defaultQuery;

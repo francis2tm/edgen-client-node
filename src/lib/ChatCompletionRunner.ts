@@ -2,7 +2,7 @@ import {
   type Completions,
   type ChatCompletionMessageParam,
   type ChatCompletionCreateParamsNonStreaming,
-} from 'openai/resources/chat/completions';
+} from 'edgen/resources/chat/completions';
 import { type RunnableFunctions, type BaseFunctionsArgs, RunnableTools } from './RunnableFunction';
 import {
   AbstractChatCompletionRunner,
