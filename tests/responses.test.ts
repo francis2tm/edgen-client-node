@@ -1,5 +1,5 @@
-import { createResponseHeaders } from 'openai/core';
-import { Headers } from 'openai/_shims/index';
+import { createResponseHeaders } from 'edgen/core';
+import { Headers } from 'edgen/_shims/index';
 
 describe('response parsing', () => {
   // TODO: test unicode characters

@@ -1,6 +1,6 @@
-import { multipartFormRequestOptions, createForm } from 'openai/core';
-import { Blob } from 'openai/_shims/index';
-import { toFile } from 'openai';
+import { multipartFormRequestOptions, createForm } from 'edgen/core';
+import { Blob } from 'edgen/_shims/index';
+import { toFile } from 'edgen';
 
 describe('form data validation', () => {
   test('valid values do not error', async () => {

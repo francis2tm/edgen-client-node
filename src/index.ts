@@ -9,19 +9,19 @@ import * as API from 'edgen/resources/index';
 
 export interface ClientOptions {
   /**
-   * Defaults to process.env['OPENAI_API_KEY'].
+   * Defaults to process.env['EDGEN_API_KEY'].
    */
   apiKey?: string;
 
   /**
-   * Defaults to process.env['OPENAI_ORG_ID'].
+   * Defaults to process.env['EDGEN_ORG_ID'].
    */
   organization?: string | null;
 
   /**
    * Override the default base URL for the API, e.g., "https://api.example.com/v2/"
    *
-   * Defaults to process.env['OPENAI_BASE_URL'].
+   * Defaults to process.env['EDGEN_BASE_URL'].
    */
   baseURL?: string | null | undefined;
 
@@ -91,9 +91,9 @@ export class Edgen extends Core.APIClient {
   /**
    * API Client for interfacing with the OpenAI API.
    *
-   * @param {string} [opts.apiKey=process.env['OPENAI_API_KEY'] ?? undefined]
-   * @param {string | null} [opts.organization=process.env['OPENAI_ORG_ID'] ?? null]
-   * @param {string} [opts.baseURL=process.env['OPENAI_BASE_URL'] ?? http://127.0.0.1:3000/v1] - Override the default base URL for the API.
+   * @param {string} [opts.apiKey=process.env['EDGEN_API_KEY'] ?? undefined]
+   * @param {string | null} [opts.organization=process.env['EDGEN_ORG_ID'] ?? null]
+   * @param {string} [opts.baseURL=process.env['EDGEN_BASE_URL'] ?? http://127.0.0.1:3000/v1] - Override the default base URL for the API.
    * @param {number} [opts.timeout=10 minutes] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {number} [opts.httpAgent] - An HTTP agent used to manage HTTP(s) connections.
    * @param {Core.Fetch} [opts.fetch] - Specify a custom `fetch` function implementation.
@@ -103,16 +103,16 @@ export class Edgen extends Core.APIClient {
    * @param {boolean} [opts.dangerouslyAllowBrowser=false] - By default, client-side use of this library is not allowed, as it risks exposing your secret API credentials to attackers.
    */
   constructor({
-    baseURL = Core.readEnv('OPENAI_BASE_URL'),
-    apiKey = Core.readEnv('OPENAI_API_KEY'),
-    organization = Core.readEnv('OPENAI_ORG_ID') ?? null,
+    baseURL = Core.readEnv('EDGEN_BASE_URL'),
+    apiKey = Core.readEnv('EDGEN_API_KEY'),
+    organization = Core.readEnv('EDGEN_ORG_ID') ?? null,
     ...opts
   }: ClientOptions = {}) {
     if (apiKey === undefined) {
       apiKey = '';
       console.log(
       // throw new Errors.EdgenError(
-        "The OPENAI_API_KEY environment variable is missing or empty; either provide it, or instantiate the OpenAI client with an apiKey option, like new OpenAI({ apiKey: 'My API Key' }).",
+        "The EDGEN_API_KEY environment variable is missing or empty; either provide it, or instantiate the OpenAI client with an apiKey option, like new OpenAI({ apiKey: 'My API Key' }).",
       );
     }
 
@@ -120,7 +120,7 @@ export class Edgen extends Core.APIClient {
       apiKey,
       organization,
       ...opts,
-      baseURL: baseURL || `https://api.openai.com/v1`,
+      baseURL: baseURL || `http://127.0.0.1:3000/v1`,
     };
 
     if (!options.dangerouslyAllowBrowser && Core.isRunningInBrowser()) {

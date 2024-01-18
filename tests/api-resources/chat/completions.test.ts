@@ -1,16 +1,16 @@
 // File generated from our OpenAPI spec by Stainless.
 
-import OpenAI from 'openai';
+import Edgen from 'edgen';
 import { Response } from 'node-fetch';
 
-const openai = new OpenAI({
+const edgen = new Edgen({
   apiKey: 'My API Key',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
 describe('resource completions', () => {
   test('create: only required params', async () => {
-    const responsePromise = openai.chat.completions.create({
+    const responsePromise = edgen.chat.completions.create({
       messages: [{ content: 'string', role: 'system' }],
       model: 'gpt-3.5-turbo',
     });
@@ -24,7 +24,7 @@ describe('resource completions', () => {
   });
 
   test('create: required and optional params', async () => {
-    const response = await openai.chat.completions.create({
+    const response = await edgen.chat.completions.create({
       messages: [{ content: 'string', role: 'system', name: 'string' }],
       model: 'gpt-3.5-turbo',
       frequency_penalty: -2,
