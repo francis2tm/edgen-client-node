@@ -1,30 +1,29 @@
 #!/usr/bin/env -S npm run tsn -T
 
-import OpenAI from 'openai';
-import { Stream } from 'openai/streaming';
+import Edgen from 'edgen';
+import { Stream } from 'edgen/streaming';
 
-// gets API Key from environment variable OPENAI_API_KEY
-const openai = new OpenAI();
+const edgen = new Edgen();
 
 async function main() {
   // ---------------- Explicit non-streaming params ------------
 
-  const params: OpenAI.Chat.ChatCompletionCreateParams = {
+  const params: Edgen.Chat.ChatCompletionCreateParams = {
     model: 'gpt-4',
     messages: [{ role: 'user', content: 'Say this is a test!' }],
   };
-  const completion = await openai.chat.completions.create(params);
-  console.log(completion.choices[0]?.message?.content);
+  const completion = await edgen.chat.completions.create(params);
+  console.log(completion);
 
   // ---------------- Explicit streaming params ----------------
 
-  const streamingParams: OpenAI.Chat.ChatCompletionCreateParams = {
+  const streamingParams: Edgen.Chat.ChatCompletionCreateParams = {
     model: 'gpt-4',
     messages: [{ role: 'user', content: 'Say this is a test!' }],
     stream: true,
   };
 
-  const stream = await openai.chat.completions.create(streamingParams);
+  const stream = await edgen.chat.completions.create(streamingParams);
   for await (const chunk of stream) {
     process.stdout.write(chunk.choices[0]?.delta?.content || '');
   }
@@ -32,12 +31,12 @@ async function main() {
 
   // ---------------- Explicit (non)streaming types ----------------
 
-  const params1: OpenAI.Chat.ChatCompletionCreateParamsNonStreaming = {
+  const params1: Edgen.Chat.ChatCompletionCreateParamsNonStreaming = {
     model: 'gpt-4',
     messages: [{ role: 'user', content: 'Say this is a test!' }],
   };
 
-  const params2: OpenAI.Chat.ChatCompletionCreateParamsStreaming = {
+  const params2: Edgen.Chat.ChatCompletionCreateParamsStreaming = {
     model: 'gpt-4',
     messages: [{ role: 'user', content: 'Say this is a test!' }],
     stream: true,
@@ -57,7 +56,7 @@ async function main() {
   };
 
   // TS knows this is a Stream instance.
-  const stream2 = await openai.chat.completions.create(streamingParams2);
+  const stream2 = await edgen.chat.completions.create(streamingParams2);
   for await (const chunk of stream2) {
     process.stdout.write(chunk.choices[0]?.delta?.content || '');
   }
@@ -71,7 +70,7 @@ async function main() {
   };
 
   // TS doesn't know if this is a `Stream` or a direct response
-  const response = await openai.chat.completions.create(streamingParams3);
+  const response = await edgen.chat.completions.create(streamingParams3);
   if (response instanceof Stream) {
     // here TS knows the response type is a `Stream`
   } else {
@@ -82,12 +81,12 @@ async function main() {
 
   // TS knows this is a `Stream`
   const streamParamsFromFn = await createCompletionParams(true);
-  const streamFromFn = await openai.chat.completions.create(streamParamsFromFn);
+  const streamFromFn = await edgen.chat.completions.create(streamParamsFromFn);
   console.log(streamFromFn);
 
   // TS knows this is a `ChatCompletion`
   const paramsFromFn = await createCompletionParams(false);
-  const completionFromFn = await openai.chat.completions.create(paramsFromFn);
+  const completionFromFn = await edgen.chat.completions.create(paramsFromFn);
   console.log(completionFromFn);
 }
 
@@ -95,13 +94,13 @@ async function main() {
 // not the response will be streamed.
 export async function createCompletionParams(
   stream: true,
-): Promise<OpenAI.Chat.ChatCompletionCreateParamsStreaming>;
+): Promise<Edgen.Chat.ChatCompletionCreateParamsStreaming>;
 export async function createCompletionParams(
   stream: false,
-): Promise<OpenAI.Chat.ChatCompletionCreateParamsNonStreaming>;
+): Promise<Edgen.Chat.ChatCompletionCreateParamsNonStreaming>;
 export async function createCompletionParams(
   stream: boolean,
-): Promise<OpenAI.Chat.ChatCompletionCreateParams> {
+): Promise<Edgen.Chat.ChatCompletionCreateParams> {
   const params = {
     model: 'gpt-3.5-turbo',
     messages: [{ role: 'user' as const, content: 'Hello!' }],

@@ -1,15 +1,15 @@
 #!/usr/bin/env -S npm run tsn -T
 
-import OpenAI, { NotFoundError } from 'openai';
+import Edgen, { NotFoundError } from 'edgen';
 
-// gets API Key from environment variable OPENAI_API_KEY
-const client = new OpenAI();
+const client = new Edgen();
 
 async function main() {
   try {
-    await client.completions.create({
-      prompt: 'Say this is a test',
-      model: 'unknown-model',
+    await client.chat.completions.create({
+      messages: [{content: 'Say this is a test', role: 'user'}],
+      model: 'unknown-model', // this is not an error
+      stream: true,
     });
   } catch (err) {
     if (err instanceof NotFoundError) {
