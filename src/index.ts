@@ -81,7 +81,7 @@ export interface ClientOptions {
   dangerouslyAllowBrowser?: boolean;
 }
 
-/** API Client for interfacing with the OpenAI API. */
+/** API Client for interfacing with the Edgen API. */
 export class Edgen extends Core.APIClient {
   apiKey: string;
   organization: string | null;
@@ -89,7 +89,7 @@ export class Edgen extends Core.APIClient {
   private _options: ClientOptions;
 
   /**
-   * API Client for interfacing with the OpenAI API.
+   * API Client for interfacing with the Edgen API.
    *
    * @param {string} [opts.apiKey=process.env['EDGEN_API_KEY'] ?? undefined]
    * @param {string | null} [opts.organization=process.env['EDGEN_ORG_ID'] ?? null]
@@ -121,7 +121,7 @@ export class Edgen extends Core.APIClient {
 
     if (!options.dangerouslyAllowBrowser && Core.isRunningInBrowser()) {
       throw new Errors.EdgenError(
-        "It looks like you're running in a browser-like environment.\n\nThis is disabled by default, as it risks exposing your secret API credentials to attackers.\nIf you understand the risks and have appropriate mitigations in place,\nyou can set the `dangerouslyAllowBrowser` option to `true`, e.g.,\n\nnew OpenAI({ apiKey, dangerouslyAllowBrowser: true });\n\nhttps://help.openai.com/en/articles/5112595-best-practices-for-api-key-safety\n",
+        "It looks like you're running in a browser-like environment.\n\nThis is disabled by default, as it risks exposing your secret API credentials to attackers.\nIf you understand the risks and have appropriate mitigations in place,\nyou can set the `dangerouslyAllowBrowser` option to `true`, e.g.,\n\nnew Edgen({ apiKey, dangerouslyAllowBrowser: true });",
       );
     }
 
@@ -150,7 +150,7 @@ export class Edgen extends Core.APIClient {
   protected override defaultHeaders(opts: Core.FinalRequestOptions): Core.Headers {
     return {
       ...super.defaultHeaders(opts),
-      'OpenAI-Organization': this.organization,
+      'Edgen-Organization': this.organization,
       ...this._options.defaultHeaders,
     };
   }

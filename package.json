@@ -1,8 +1,8 @@
 {
   "name": "edgen",
   "version": "4.24.7",
-  "description": "The official TypeScript library for the OpenAI API",
-  "author": "OpenAI <support@openai.com>",
+  "description": "The official TypeScript library for the Edgen API",
+  "author": "Edgen <support@edgen.com>",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
   "type": "commonjs",

@@ -335,10 +335,10 @@ export abstract class AbstractChatCompletionRunner<
       return this._emit('error', error);
     }
     if (error instanceof Error) {
-      const openAIError: EdgenError = new EdgenError(error.message);
+      const edgenError: EdgenError = new EdgenError(error.message);
       // @ts-ignore
-      openAIError.cause = error;
-      return this._emit('error', openAIError);
+      edgenError.cause = error;
+      return this._emit('error', edgenError);
     }
     return this._emit('error', new EdgenError(String(error)));
   };

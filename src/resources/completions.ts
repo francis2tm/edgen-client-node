@@ -125,11 +125,7 @@ export type CompletionCreateParams = CompletionCreateParamsNonStreaming | Comple
 
 export interface CompletionCreateParamsBase {
   /**
-   * ID of the model to use. You can use the
-   * [List models](https://platform.openai.com/docs/api-reference/models/list) API to
-   * see all of your available models, or see our
-   * [Model overview](https://platform.openai.com/docs/models/overview) for
-   * descriptions of them.
+   * ID of the model to use.
    */
   model: (string & {}) | 'gpt-3.5-turbo-instruct' | 'davinci-002' | 'babbage-002';
 
@@ -166,7 +162,6 @@ export interface CompletionCreateParamsBase {
    * existing frequency in the text so far, decreasing the model's likelihood to
    * repeat the same line verbatim.
    *
-   * [See more information about frequency and presence penalties.](https://platform.openai.com/docs/guides/text-generation/parameter-details)
    */
   frequency_penalty?: number | null;
 
@@ -202,7 +197,6 @@ export interface CompletionCreateParamsBase {
    *
    * The token count of your prompt plus `max_tokens` cannot exceed the model's
    * context length.
-   * [Example Python code](https://cookbook.openai.com/examples/how_to_count_tokens_with_tiktoken)
    * for counting tokens.
    */
   max_tokens?: number | null;
@@ -221,7 +215,6 @@ export interface CompletionCreateParamsBase {
    * whether they appear in the text so far, increasing the model's likelihood to
    * talk about new topics.
    *
-   * [See more information about frequency and presence penalties.](https://platform.openai.com/docs/guides/text-generation/parameter-details)
    */
   presence_penalty?: number | null;
 
@@ -247,7 +240,6 @@ export interface CompletionCreateParamsBase {
    * [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format)
    * as they become available, with the stream terminated by a `data: [DONE]`
    * message.
-   * [Example Python code](https://cookbook.openai.com/examples/how_to_stream_completions).
    */
   stream?: boolean | null;
 
@@ -275,9 +267,8 @@ export interface CompletionCreateParamsBase {
   top_p?: number | null;
 
   /**
-   * A unique identifier representing your end-user, which can help OpenAI to monitor
+   * A unique identifier representing your end-user, which can help Edgen to monitor
    * and detect abuse.
-   * [Learn more](https://platform.openai.com/docs/guides/safety-best-practices/end-user-ids).
    */
   user?: string;
 }
@@ -294,7 +285,6 @@ export interface CompletionCreateParamsNonStreaming extends CompletionCreatePara
    * [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format)
    * as they become available, with the stream terminated by a `data: [DONE]`
    * message.
-   * [Example Python code](https://cookbook.openai.com/examples/how_to_stream_completions).
    */
   stream?: false | null;
 }
@@ -306,7 +296,6 @@ export interface CompletionCreateParamsStreaming extends CompletionCreateParamsB
    * [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format)
    * as they become available, with the stream terminated by a `data: [DONE]`
    * message.
-   * [Example Python code](https://cookbook.openai.com/examples/how_to_stream_completions).
    */
   stream: true;
 }

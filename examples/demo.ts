@@ -2,7 +2,6 @@
 
 import Edgen from 'edgen';
 
-// gets API Key from environment variable OPENAI_API_KEY
 const client = new Edgen();
 
 async function main() {

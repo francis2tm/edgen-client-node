@@ -3,7 +3,7 @@ import {
   type ChatCompletionFunctionMessageParam,
   type ChatCompletionMessageParam,
   type ChatCompletionToolMessageParam,
-} from 'openai/resources';
+} from 'edgen/resources';
 
 export const isAssistantMessage = (
   message: ChatCompletionMessageParam | null | undefined,
