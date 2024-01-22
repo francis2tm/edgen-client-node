@@ -15,7 +15,7 @@ yarn add edgen
 
 ## Usage
 
-The full API of this library can be found in [api.md file](api.md) along with many [code examples](https://github.com/edgenai/edgen-node-client/tree/master/examples). The code below shows how to get started using the chat completions API.
+The full API of this library can be found in [api.md file](api.md) along with many [code examples](https://github.com/edgenai/edgen-client-node/tree/master/examples). The code below shows how to get started using the chat completions API.
 
 <!-- prettier-ignore -->
 ```js
@@ -185,7 +185,7 @@ import Edgen from 'edgen';
 ```
 
 To do the inverse, add `import "edgen/shims/node"` (which does import polyfills).
-This can also be useful if you are getting the wrong TypeScript types for `Response` - more details [here](https://github.com/edgenai/edgen-node-client/tree/master/src/_shims#readme).
+This can also be useful if you are getting the wrong TypeScript types for `Response` - more details [here](https://github.com/edgenai/edgen-client-node/tree/master/src/_shims#readme).
 
 You may also provide a custom `fetch` function when instantiating the client,
 which can be used to inspect or alter the `Request` or `Response` before/after each request:
