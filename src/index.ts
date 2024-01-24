@@ -114,7 +114,7 @@ export class edgen extends Core.APIClient {
       apiKey,
       organization,
       ...opts,
-      baseURL: baseURL || `http://127.0.0.1:3000/v1`,
+      baseURL: baseURL || `http://127.0.0.1:33322/v1`,
     };
 
     if (!options.dangerouslyAllowBrowser && Core.isRunningInBrowser()) {

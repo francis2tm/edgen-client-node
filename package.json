@@ -1,6 +1,6 @@
 {
   "name": "edgen-client",
-  "version": "4.24.7",
+  "version": "0.1.0",
   "description": "The official TypeScript library for the edgen API",
   "author": "edgen <support@edgen.co>",
   "types": "dist/index.d.ts",
