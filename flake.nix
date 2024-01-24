@@ -37,6 +37,7 @@
                 dbus
                 openssl_3
                 nodejs_18
+                yarn
             ];
 
             buildInputs = packages;

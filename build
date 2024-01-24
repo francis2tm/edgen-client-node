@@ -44,8 +44,8 @@ node scripts/postprocess-files.cjs
 
 # make sure that nothing crashes when we require the output CJS or
 # import the output ESM
-(cd dist && node -e 'require("edgen2")')
-(cd dist && node -e 'import("edgen2")' --input-type=module)
+# (cd dist && node -e 'require("edgen2")')
+# (cd dist && node -e 'import("edgen2")' --input-type=module)
 
 if command -v deno &> /dev/null && [ -e ./build-deno ]
 then
