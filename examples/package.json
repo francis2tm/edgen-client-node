@@ -1,7 +1,7 @@
 {
-  "name": "edgen-examples",
+  "name": "edgen2-examples",
   "version": "1.0.0",
-  "description": "Usage examples for the Edgen Node.js SDK.",
+  "description": "Usage examples for the edgen2 Node.js SDK.",
   "main": "index.js",
   "license": "MIT",
   "private": true,

@@ -42,11 +42,11 @@ export let isFsReadStream: Shims['isFsReadStream'] | undefined = undefined;
 export function setShims(shims: Shims, options: { auto: boolean } = { auto: false }) {
   if (auto) {
     throw new Error(
-      `you must \`import 'edgen/shims/${shims.kind}'\` before importing anything else from edgen`,
+      `you must \`import 'edgen2/shims/${shims.kind}'\` before importing anything else from edgen2`,
     );
   }
   if (kind) {
-    throw new Error(`can't \`import 'edgen/shims/${shims.kind}'\` after \`import 'edgen/shims/${kind}'\``);
+    throw new Error(`can't \`import 'edgen2/shims/${shims.kind}'\` after \`import 'edgen2/shims/${kind}'\``);
   }
   auto = options.auto;
   kind = shims.kind;

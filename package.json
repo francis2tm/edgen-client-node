@@ -1,12 +1,12 @@
 {
-  "name": "francis-edgen",
+  "name": "francis-edgen2",
   "version": "4.24.7",
-  "description": "The official TypeScript library for the Edgen API",
-  "author": "Edgen <support@edgen.com>",
+  "description": "The official TypeScript library for the edgen2 API",
+  "author": "edgen2 <support@edgen2.com>",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
   "type": "commonjs",
-  "repository": "github:edgenai/edgen-client-node",
+  "repository": "github:edgen2ai/edgen2-client-node",
   "license": "Apache-2.0",
   "packageManager": "yarn@1.22.21",
   "private": false,
@@ -59,8 +59,8 @@
     "./shims/web.mjs"
   ],
   "imports": {
-    "edgen": ".",
-    "edgen/*": "./src/*"
+    "edgen2": ".",
+    "edgen2/*": "./src/*"
   },
   "exports": {
     "./_shims/auto/*": {

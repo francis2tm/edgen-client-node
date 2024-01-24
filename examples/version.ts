@@ -1,10 +1,10 @@
 #!/usr/bin/env -S npm run tsn -T
 
-import 'edgen/shims/node';
+import 'edgen2/shims/node';
 
-import Edgen from 'edgen';
+import edgen2 from 'edgen2';
 
-const client = new Edgen();
+const client = new edgen2();
 
 async function main() {
     const ver = await client.misc.version.create();

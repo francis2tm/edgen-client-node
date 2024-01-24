@@ -1,9 +1,9 @@
 
 
-import * as Core from 'edgen/core';
-import { APIResource } from 'edgen/resource';
-import * as TranscriptionsAPI from 'edgen/resources/audio/transcriptions';
-import { type Uploadable, multipartFormRequestOptions } from 'edgen/core';
+import * as Core from 'edgen2/core';
+import { APIResource } from 'edgen2/resource';
+import * as TranscriptionsAPI from 'edgen2/resources/audio/transcriptions';
+import { type Uploadable, multipartFormRequestOptions } from 'edgen2/core';
 
 export class Transcriptions extends APIResource {
   /**

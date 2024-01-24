@@ -4,8 +4,8 @@
 /**
  * Types will get added to this namespace when you import one of the following:
  *
- *   import 'edgen/shims/node'
- *   import 'edgen/shims/web'
+ *   import 'edgen2/shims/node'
+ *   import 'edgen2/shims/web'
  *
  * Importing more than one will cause type and runtime errors.
  */

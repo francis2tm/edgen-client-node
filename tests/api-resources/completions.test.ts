@@ -1,15 +1,15 @@
 
-import Edgen from 'edgen';
+import edgen2 from 'edgen2';
 import { Response } from 'node-fetch';
 
-const edgen = new Edgen({
+const edgen2 = new edgen2({
   apiKey: 'My API Key',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
 describe('resource completions', () => {
   test('create: only required params', async () => {
-    const responsePromise = edgen.completions.create({ model: 'string', prompt: 'This is a test.' });
+    const responsePromise = edgen2.completions.create({ model: 'string', prompt: 'This is a test.' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -20,7 +20,7 @@ describe('resource completions', () => {
   });
 
   test('create: required and optional params', async () => {
-    const response = await edgen.completions.create({
+    const response = await edgen2.completions.create({
       model: 'string',
       prompt: 'This is a test.',
       best_of: 0,

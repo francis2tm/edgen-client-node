@@ -1,15 +1,15 @@
 
-import Edgen, { toFile } from 'edgen';
+import edgen2, { toFile } from 'edgen2';
 import { Response } from 'node-fetch';
 
-const edgen = new Edgen({
+const edgen2 = new edgen2({
   apiKey: 'My API Key',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
 describe('resource transcriptions', () => {
   test('create: only required params', async () => {
-    const responsePromise = edgen.audio.transcriptions.create({
+    const responsePromise = edgen2.audio.transcriptions.create({
       file: await toFile(Buffer.from('# my file contents'), 'README.md'),
       model: 'whisper-1',
     });
@@ -23,7 +23,7 @@ describe('resource transcriptions', () => {
   });
 
   test('create: required and optional params', async () => {
-    const response = await edgen.audio.transcriptions.create({
+    const response = await edgen2.audio.transcriptions.create({
       file: await toFile(Buffer.from('# my file contents'), 'README.md'),
       model: 'whisper-1',
       language: 'string',

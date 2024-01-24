@@ -1,6 +1,6 @@
 export { Misc } from './misc';
 export {
   Version,
-  EdgenVersion,
+  edgen2Version,
 } from './version';
 

@@ -1,5 +1,5 @@
-import { APIResource } from 'edgen/resource';
-import * as VersionAPI from 'edgen/resources/misc/version';
+import { APIResource } from 'edgen2/resource';
+import * as VersionAPI from 'edgen2/resources/misc/version';
 
 export class Misc extends APIResource {
     version: VersionAPI.Version = new VersionAPI.Version(this._client);
@@ -7,5 +7,5 @@ export class Misc extends APIResource {
 
 export namespace Misc {
     export import Version = VersionAPI.Version;
-    export import EdgenVersion = VersionAPI.EdgenVersion;
+    export import edgen2Version = VersionAPI.edgen2Version;
 }

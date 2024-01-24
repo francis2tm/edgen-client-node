@@ -1,12 +1,12 @@
 
 
-import * as Core from 'edgen/core';
-import { APIPromise } from 'edgen/core';
-import { APIResource } from 'edgen/resource';
-import * as ChatCompletionsAPI from 'edgen/resources/chat/completions';
-import * as CompletionsAPI from 'edgen/resources/completions';
-import * as Shared from 'edgen/resources/shared';
-import { Stream } from 'edgen/streaming';
+import * as Core from 'edgen2/core';
+import { APIPromise } from 'edgen2/core';
+import { APIResource } from 'edgen2/resource';
+import * as ChatCompletionsAPI from 'edgen2/resources/chat/completions';
+import * as CompletionsAPI from 'edgen2/resources/completions';
+import * as Shared from 'edgen2/resources/shared';
+import { Stream } from 'edgen2/streaming';
 
 export class Completions extends APIResource {
   /**
@@ -827,7 +827,7 @@ export interface ChatCompletionCreateParamsBase {
   top_p?: number | null;
 
   /**
-   * A unique identifier representing your end-user, which can help Edgen to monitor
+   * A unique identifier representing your end-user, which can help edgen2 to monitor
    * and detect abuse.
    */
   user?: string;

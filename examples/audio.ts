@@ -1,10 +1,10 @@
 #!/usr/bin/env -S npm run tsn -T
-import 'edgen/shims/node';
+import 'edgen2/shims/node';
 
-import Edgen, { toFile } from 'edgen';
+import edgen2, { toFile } from 'edgen2';
 import fs from 'fs';
 
-const client = new Edgen();
+const client = new edgen2();
 
 async function main() {
   await demo();
