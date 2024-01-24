@@ -1,15 +1,15 @@
-import * as VersionAPI from 'edgen-client/resources/misc/version';
-import * as Core from 'edgen-client/core';
-import { APIPromise } from 'edgen-client/core';
-import { APIResource } from 'edgen-client/resource';
+import * as VersionAPI from 'edgen/resources/misc/version';
+import * as Core from 'edgen/core';
+import { APIPromise } from 'edgen/core';
+import { APIResource } from 'edgen/resource';
 
 export class Version extends APIResource {
-    create(): APIPromise<edgen-clientVersion> {
-        return this._client.get('/version') as APIPromise<edgen-clientVersion>;
+    create(): APIPromise<edgenVersion> {
+        return this._client.get('/version') as APIPromise<edgenVersion>;
     }
 }
 
-export interface edgen-clientVersion {
+export interface edgenVersion {
     major: number;
     minor: number;
     patch: number;
@@ -18,5 +18,5 @@ export interface edgen-clientVersion {
 
 export namespace Version {
     export import Version = VersionAPI.Version;
-    export import edgen-clientVersion = VersionAPI.edgen-clientVersion;
+    export import edgenVersion = VersionAPI.edgenVersion;
 }

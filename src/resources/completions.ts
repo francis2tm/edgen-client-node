@@ -1,10 +1,8 @@
-
-
-import * as Core from 'edgen-client/core';
-import { APIPromise } from 'edgen-client/core';
-import { APIResource } from 'edgen-client/resource';
-import * as CompletionsAPI from 'edgen-client/resources/completions';
-import { Stream } from 'edgen-client/streaming';
+import * as Core from 'edgen/core';
+import { APIPromise } from 'edgen/core';
+import { APIResource } from 'edgen/resource';
+import * as CompletionsAPI from 'edgen/resources/completions';
+import { Stream } from 'edgen/streaming';
 
 export class Completions extends APIResource {
   /**
@@ -267,7 +265,7 @@ export interface CompletionCreateParamsBase {
   top_p?: number | null;
 
   /**
-   * A unique identifier representing your end-user, which can help edgen-client to monitor
+   * A unique identifier representing your end-user, which can help edgen to monitor
    * and detect abuse.
    */
   user?: string;

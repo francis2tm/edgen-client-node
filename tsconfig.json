@@ -9,9 +9,9 @@
     "esModuleInterop": true,
     "baseUrl": "./",
     "paths": {
-      "edgen-client/_shims/auto/*": ["src/_shims/auto/*-node"],
-      "edgen-client/*": ["src/*"],
-      "edgen-client": ["src/index.ts"],
+      "edgen/_shims/auto/*": ["src/_shims/auto/*-node"],
+      "edgen/*": ["src/*"],
+      "edgen": ["src/index.ts"],
       "digest-fetch": ["./typings/digest-fetch"]
     },
     "noEmit": true,

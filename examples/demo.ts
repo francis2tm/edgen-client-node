@@ -1,8 +1,8 @@
 #!/usr/bin/env -S npm run tsn -T
 
-import edgen-client from 'edgen-client';
+import edgen from 'edgen';
 
-const client = new edgen-client();
+const client = new edgen();
 
 async function main() {
   // Non-streaming:

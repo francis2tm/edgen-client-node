@@ -1,9 +1,8 @@
-
 import { castToError, Headers } from './core';
 
-export class edgen-clientError extends Error {}
+export class edgenError extends Error {}
 
-export class APIError extends edgen-clientError {
+export class APIError extends edgenError {
   readonly status: number | undefined;
   readonly headers: Headers | undefined;
   readonly error: Object | undefined;

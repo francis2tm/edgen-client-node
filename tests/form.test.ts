@@ -1,6 +1,6 @@
-import { multipartFormRequestOptions, createForm } from 'edgen-client/core';
-import { Blob } from 'edgen-client/_shims/index';
-import { toFile } from 'edgen-client';
+import { multipartFormRequestOptions, createForm } from 'edgen/core';
+import { Blob } from 'edgen/_shims/index';
+import { toFile } from 'edgen';
 
 describe('form data validation', () => {
   test('valid values do not error', async () => {

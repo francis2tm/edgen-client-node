@@ -1,7 +1,7 @@
 
 
-import { APIResource } from 'edgen-client/resource';
-import * as CompletionsAPI from 'edgen-client/resources/chat/completions';
+import { APIResource } from 'edgen/resource';
+import * as CompletionsAPI from 'edgen/resources/chat/completions';
 
 export class Chat extends APIResource {
   completions: CompletionsAPI.Completions = new CompletionsAPI.Completions(this._client);

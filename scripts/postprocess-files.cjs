@@ -105,11 +105,11 @@ async function postprocess() {
 
     let transformed = mapModulePaths(code, (importPath) => {
       if (file.startsWith(distSrcDir)) {
-        if (importPath.startsWith('edgen-client/')) {
+        if (importPath.startsWith('edgen/')) {
           // convert self-references in dist/src to relative paths
           let relativePath = path.relative(
             path.dirname(file),
-            path.join(distSrcDir, importPath.substring('edgen-client/'.length)),
+            path.join(distSrcDir, importPath.substring('edgen/'.length)),
           );
           if (!relativePath.startsWith('.')) relativePath = `./${relativePath}`;
           return relativePath;
@@ -137,7 +137,7 @@ async function postprocess() {
 
     if (file.endsWith('.d.ts')) {
       // work around bad tsc behavior
-      // if we have `import { type Readable } from 'edgen-client/_shims/index'`,
+      // if we have `import { type Readable } from 'edgen/_shims/index'`,
       // tsc sometimes replaces `Readable` with `import("stream").Readable` inline
       // in the output .d.ts
       transformed = transformed.replace(/import\("stream"\).Readable/g, 'Readable');

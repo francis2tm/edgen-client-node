@@ -1,12 +1,12 @@
 {
   "name": "edgen-client",
   "version": "4.24.7",
-  "description": "The official TypeScript library for the edgen-client API",
-  "author": "edgen-client <support@edgen-client.co>",
+  "description": "The official TypeScript library for the edgen API",
+  "author": "edgen <support@edgen.co>",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
   "type": "commonjs",
-  "repository": "github:edgen-clientai/edgen-client-client-node",
+  "repository": "github:edgenai/edgen-client-node",
   "license": "Apache-2.0",
   "packageManager": "yarn@1.22.21",
   "private": false,
@@ -59,8 +59,8 @@
     "./shims/web.mjs"
   ],
   "imports": {
-    "edgen-client": ".",
-    "edgen-client/*": "./src/*"
+    "edgen": ".",
+    "edgen/*": "./src/*"
   },
   "exports": {
     "./_shims/auto/*": {

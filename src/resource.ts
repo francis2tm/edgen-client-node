@@ -1,11 +1,9 @@
-
-
-import type { edgen-client } from './index';
+import type { edgen } from './index';
 
 export class APIResource {
-  protected _client: edgen-client;
+  protected _client: edgen;
 
-  constructor(client: edgen-client) {
+  constructor(client: edgen) {
     this._client = client;
   }
 }

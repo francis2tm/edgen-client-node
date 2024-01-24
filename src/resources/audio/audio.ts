@@ -1,7 +1,7 @@
 
 
-import { APIResource } from 'edgen-client/resource';
-import * as TranscriptionsAPI from 'edgen-client/resources/audio/transcriptions';
+import { APIResource } from 'edgen/resource';
+import * as TranscriptionsAPI from 'edgen/resources/audio/transcriptions';
 
 export class Audio extends APIResource {
   transcriptions: TranscriptionsAPI.Transcriptions = new TranscriptionsAPI.Transcriptions(this._client);

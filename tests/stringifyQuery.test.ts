@@ -1,4 +1,4 @@
-import { APIClient } from 'edgen-client/core';
+import { APIClient } from 'edgen/core';
 
 const { stringifyQuery } = APIClient.prototype as any;
 
