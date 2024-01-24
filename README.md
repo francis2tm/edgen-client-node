@@ -1,6 +1,6 @@
-# edgen2 Node API Library
+# edgen-client Node API Library
 
-This library provides convenient access to the edgen2 REST API from TypeScript or JavaScript.
+This library provides convenient access to the edgen-client REST API from TypeScript or JavaScript.
 It is a fork of the official OpenAI Python library.
 
 The original library was generated from the [OpenAPI specification](https://github.com/openai/openai-openapi) with [Stainless](https://stainlessapi.com/).
@@ -8,25 +8,25 @@ The original library was generated from the [OpenAPI specification](https://gith
 ## Installation
 
 ```sh
-npm install --save edgen2
+npm install --save edgen-client
 # or
-yarn add edgen2
+yarn add edgen-client
 ```
 
 ## Usage
 
-The full API of this library can be found in [api.md file](api.md) along with many [code examples](https://github.com/edgen2ai/edgen2-client-node/tree/master/examples). The code below shows how to get started using the chat completions API.
+The full API of this library can be found in [api.md file](api.md) along with many [code examples](https://github.com/edgen-clientai/edgen-client-client-node/tree/master/examples). The code below shows how to get started using the chat completions API.
 
 <!-- prettier-ignore -->
 ```js
-import edgen2 from 'edgen2';
+import edgen-client from 'edgen-client';
 
-const edgen2 = new edgen2({
-  baseURL: process.env['edgen2_BASE_URL'], // This is the default and can be omitted
+const edgen-client = new edgen-client({
+  baseURL: process.env['edgen-client_BASE_URL'], // This is the default and can be omitted
 });
 
 async function main() {
-  const chatCompletion = await edgen2.chat.completions.create({
+  const chatCompletion = await edgen-client.chat.completions.create({
     messages: [{ role: 'user', content: 'Say this is a test' }],
     model: 'gpt-3.5-turbo',
   });
@@ -40,12 +40,12 @@ main();
 We provide support for streaming responses using Server Sent Events (SSE).
 
 ```ts
-import edgen2 from 'edgen2';
+import edgen-client from 'edgen-client';
 
-const edgen2 = new edgen2();
+const edgen-client = new edgen-client();
 
 async function main() {
-  const stream = await edgen2.chat.completions.create({
+  const stream = await edgen-client.chat.completions.create({
     model: 'gpt-4',
     messages: [{ role: 'user', content: 'Say this is a test' }],
     stream: true,
@@ -67,16 +67,16 @@ This library includes TypeScript definitions for all request params and response
 
 <!-- prettier-ignore -->
 ```ts
-import edgen2 from 'edgen2';
+import edgen-client from 'edgen-client';
 
-const edgen2 = new edgen2();
+const edgen-client = new edgen-client();
 
 async function main() {
-  const params: edgen2.Chat.ChatCompletionCreateParams = {
+  const params: edgen-client.Chat.ChatCompletionCreateParams = {
     messages: [{ role: 'user', content: 'Say this is a test' }],
     model: 'gpt-3.5-turbo',
   };
-  const chatCompletion: edgen2.Chat.ChatCompletion = await edgen2.chat.completions.create(params);
+  const chatCompletion: edgen-client.Chat.ChatCompletion = await edgen-client.chat.completions.create(params);
 }
 
 main();
@@ -93,13 +93,13 @@ a subclass of `APIError` will be thrown:
 <!-- prettier-ignore -->
 ```ts
 async function main() {
-  const job = await edgen2.chat.completions
+  const job = await edgen-client.chat.completions
     .create({
         messages: [{ role: 'user', content: 'Say this is a test' }],
         model: 'gpt-3.5-turbo',
      })
     .catch((err) => {
-      if (err instanceof edgen2.APIError) {
+      if (err instanceof edgen-client.APIError) {
         console.log(err.status); // 400
         console.log(err.name); // BadRequestError
         console.log(err.headers); // {server: 'nginx', ...}
@@ -136,12 +136,12 @@ You can use the `maxRetries` option to configure or disable this:
 <!-- prettier-ignore -->
 ```js
 // Configure the default for all requests:
-const edgen2 = new edgen2({
+const edgen-client = new edgen-client({
   maxRetries: 0, // default is 2
 });
 
 // Or, configure per-request:
-await edgen2.chat.completions.create({ messages: [{ role: 'user', content: 'How can I get the name of the current day in Node.js?' }], model: 'gpt-3.5-turbo' }, {
+await edgen-client.chat.completions.create({ messages: [{ role: 'user', content: 'How can I get the name of the current day in Node.js?' }], model: 'gpt-3.5-turbo' }, {
   maxRetries: 5,
 });
 ```
@@ -153,12 +153,12 @@ Requests time out after 10 minutes by default. You can configure this with a `ti
 <!-- prettier-ignore -->
 ```ts
 // Configure the default for all requests:
-const edgen2 = new edgen2({
+const edgen-client = new edgen-client({
   timeout: 20 * 1000, // 20 seconds (default is 10 minutes)
 });
 
 // Override per-request:
-await edgen2.chat.completions.create({ messages: [{ role: 'user', content: 'How can I list all files in a directory using Python?' }], model: 'gpt-3.5-turbo' }, {
+await edgen-client.chat.completions.create({ messages: [{ role: 'user', content: 'How can I list all files in a directory using Python?' }], model: 'gpt-3.5-turbo' }, {
   timeout: 5 * 1000,
 });
 ```
@@ -175,26 +175,26 @@ By default, this library uses `node-fetch` in Node, and expects a global `fetch`
 
 If you would prefer to use a global, web-standards-compliant `fetch` function even in a Node environment,
 (for example, if you are running Node with `--experimental-fetch` or using NextJS which polyfills with `undici`),
-add the following import before your first import `from "edgen2"`:
+add the following import before your first import `from "edgen-client"`:
 
 ```ts
 // Tell TypeScript and the package to use the global web fetch instead of node-fetch.
 // Note, despite the name, this does not add any polyfills, but expects them to be provided if needed.
-import 'edgen2/shims/web';
-import edgen2 from 'edgen2';
+import 'edgen-client/shims/web';
+import edgen-client from 'edgen-client';
 ```
 
-To do the inverse, add `import "edgen2/shims/node"` (which does import polyfills).
-This can also be useful if you are getting the wrong TypeScript types for `Response` - more details [here](https://github.com/edgen2ai/edgen2-client-node/tree/master/src/_shims#readme).
+To do the inverse, add `import "edgen-client/shims/node"` (which does import polyfills).
+This can also be useful if you are getting the wrong TypeScript types for `Response` - more details [here](https://github.com/edgen-clientai/edgen-client-client-node/tree/master/src/_shims#readme).
 
 You may also provide a custom `fetch` function when instantiating the client,
 which can be used to inspect or alter the `Request` or `Response` before/after each request:
 
 ```ts
 import { fetch } from 'undici'; // as one example
-import edgen2 from 'edgen2';
+import edgen-client from 'edgen-client';
 
-const client = new edgen2({
+const client = new edgen-client({
   fetch: async (url: RequestInfo, init?: RequestInfo): Promise<Response> => {
     console.log('About to make a request', url, init);
     const response = await fetch(url, init);

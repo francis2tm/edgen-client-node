@@ -1,5 +1,5 @@
-import { createResponseHeaders } from 'edgen2/core';
-import { Headers } from 'edgen2/_shims/index';
+import { createResponseHeaders } from 'edgen-client/core';
+import { Headers } from 'edgen-client/_shims/index';
 
 describe('response parsing', () => {
   // TODO: test unicode characters

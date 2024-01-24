@@ -1,7 +1,7 @@
 import { ReadableStream, type Response } from './_shims/index';
-import { edgen2Error } from './error';
+import { edgen-clientError } from './error';
 
-import { APIError } from 'edgen2/error';
+import { APIError } from 'edgen-client/error';
 
 type Bytes = string | ArrayBuffer | Uint8Array | Buffer | null | undefined;
 
@@ -28,7 +28,7 @@ export class Stream<Item> implements AsyncIterable<Item> {
     async function* iterMessages(): AsyncGenerator<ServerSentEvent, void, unknown> {
       if (!response.body) {
         controller.abort();
-        throw new edgen2Error(`Attempted to iterate over a response with no body`);
+        throw new edgen-clientError(`Attempted to iterate over a response with no body`);
       }
 
       const lineDecoder = new LineDecoder();
@@ -330,7 +330,7 @@ class LineDecoder {
         return Buffer.from(bytes).toString();
       }
 
-      throw new edgen2Error(
+      throw new edgen-clientError(
         `Unexpected: received non-Uint8Array (${bytes.constructor.name}) stream chunk in an environment with a global "Buffer" defined, which this library assumes to be Node. Please report this error.`,
       );
     }
@@ -342,14 +342,14 @@ class LineDecoder {
         return this.textDecoder.decode(bytes);
       }
 
-      throw new edgen2Error(
+      throw new edgen-clientError(
         `Unexpected: received non-Uint8Array/ArrayBuffer (${
           (bytes as any).constructor.name
         }) in a web platform. Please report this error.`,
       );
     }
 
-    throw new edgen2Error(
+    throw new edgen-clientError(
       `Unexpected: neither Buffer nor TextDecoder are available as globals. Please report this error.`,
     );
   }

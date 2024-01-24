@@ -1,6 +1,6 @@
 import fs from 'fs';
-import { toFile, type ResponseLike } from 'edgen2/uploads';
-import { File } from 'edgen2/_shims/index';
+import { toFile, type ResponseLike } from 'edgen-client/uploads';
+import { File } from 'edgen-client/_shims/index';
 
 class MyClass {
   name: string = 'foo';

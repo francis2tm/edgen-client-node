@@ -1,8 +1,8 @@
 #!/usr/bin/env -S npm run tsn -T
 
-import edgen2, { NotFoundError } from 'edgen2';
+import edgen-client, { NotFoundError } from 'edgen-client';
 
-const client = new edgen2();
+const client = new edgen-client();
 
 async function main() {
   try {

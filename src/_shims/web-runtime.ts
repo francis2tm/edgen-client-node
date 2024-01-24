@@ -9,9 +9,9 @@ export function getRuntime({ manuallyImported }: { manuallyImported?: boolean } 
   const recommendation =
     manuallyImported ?
       `You may need to use polyfills`
-    : `Add one of these imports before your first \`import … from 'edgen2'\`:
-- \`import 'edgen2/shims/node'\` (if you're running on Node)
-- \`import 'edgen2/shims/web'\` (otherwise)
+    : `Add one of these imports before your first \`import … from 'edgen-client'\`:
+- \`import 'edgen-client/shims/node'\` (if you're running on Node)
+- \`import 'edgen-client/shims/web'\` (otherwise)
 `;
 
   let _fetch, _Request, _Response, _Headers;
