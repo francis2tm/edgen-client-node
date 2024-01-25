@@ -93,7 +93,7 @@ export class Edgen extends Core.APIClient {
    *
    * @param {string} [opts.apiKey=process.env['EDGEN_API_KEY'] ?? undefined]
    * @param {string | null} [opts.organization=process.env['EDGEN_ORG_ID'] ?? null]
-   * @param {string} [opts.baseURL=process.env['EDGEN_BASE_URL'] ?? http://127.0.0.1:3000/v1] - Override the default base URL for the API.
+   * @param {string} [opts.baseURL=process.env['EDGEN_BASE_URL'] ?? http://127.0.0.1:33322/v1] - Override the default base URL for the API.
    * @param {number} [opts.timeout=10 minutes] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {number} [opts.httpAgent] - An HTTP agent used to manage HTTP(s) connections.
    * @param {Core.Fetch} [opts.fetch] - Specify a custom `fetch` function implementation.
