@@ -827,7 +827,7 @@ export interface ChatCompletionCreateParamsBase {
   top_p?: number | null;
 
   /**
-   * A unique identifier representing your end-user, which can help edgen to monitor
+   * A unique identifier representing your end-user, which can help Edgen to monitor
    * and detect abuse.
    */
   user?: string;

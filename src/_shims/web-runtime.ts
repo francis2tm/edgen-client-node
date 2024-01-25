@@ -94,7 +94,9 @@ export function getRuntime({ manuallyImported }: { manuallyImported?: boolean } 
     }),
     getDefaultAgent: (url: string) => undefined,
     fileFromPath: () => {
-      throw new Error('The `fileFromPath` function is only supported in Node.');
+      throw new Error(
+        'The `fileFromPath` function is only supported in Node.'
+      );
     },
     isFsReadStream: (value: any) => false,
   };

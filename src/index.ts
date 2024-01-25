@@ -1,3 +1,5 @@
+
+
 import * as Core from './core';
 import * as Pagination from './pagination';
 import * as Errors from './error';
@@ -7,19 +9,19 @@ import * as API from 'edgen/resources/index';
 
 export interface ClientOptions {
   /**
-   * Defaults to process.env['edgen_API_KEY'].
+   * Defaults to process.env['EDGEN_API_KEY'].
    */
   apiKey?: string;
 
   /**
-   * Defaults to process.env['edgen_ORG_ID'].
+   * Defaults to process.env['EDGEN_ORG_ID'].
    */
   organization?: string | null;
 
   /**
    * Override the default base URL for the API, e.g., "https://api.example.com/v2/"
    *
-   * Defaults to process.env['edgen_BASE_URL'].
+   * Defaults to process.env['EDGEN_BASE_URL'].
    */
   baseURL?: string | null | undefined;
 
@@ -79,19 +81,19 @@ export interface ClientOptions {
   dangerouslyAllowBrowser?: boolean;
 }
 
-/** API Client for interfacing with the edgen API. */
-export class edgen extends Core.APIClient {
+/** API Client for interfacing with the Edgen API. */
+export class Edgen extends Core.APIClient {
   apiKey: string;
   organization: string | null;
 
   private _options: ClientOptions;
 
   /**
-   * API Client for interfacing with the edgen API.
+   * API Client for interfacing with the Edgen API.
    *
-   * @param {string} [opts.apiKey=process.env['edgen_API_KEY'] ?? undefined]
-   * @param {string | null} [opts.organization=process.env['edgen_ORG_ID'] ?? null]
-   * @param {string} [opts.baseURL=process.env['edgen_BASE_URL'] ?? http://127.0.0.1:3000/v1] - Override the default base URL for the API.
+   * @param {string} [opts.apiKey=process.env['EDGEN_API_KEY'] ?? undefined]
+   * @param {string | null} [opts.organization=process.env['EDGEN_ORG_ID'] ?? null]
+   * @param {string} [opts.baseURL=process.env['EDGEN_BASE_URL'] ?? http://127.0.0.1:3000/v1] - Override the default base URL for the API.
    * @param {number} [opts.timeout=10 minutes] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {number} [opts.httpAgent] - An HTTP agent used to manage HTTP(s) connections.
    * @param {Core.Fetch} [opts.fetch] - Specify a custom `fetch` function implementation.
@@ -101,9 +103,9 @@ export class edgen extends Core.APIClient {
    * @param {boolean} [opts.dangerouslyAllowBrowser=false] - By default, client-side use of this library is not allowed, as it risks exposing your secret API credentials to attackers.
    */
   constructor({
-    baseURL = Core.readEnv('edgen_BASE_URL'),
-    apiKey = Core.readEnv('edgen_API_KEY'),
-    organization = Core.readEnv('edgen_ORG_ID') ?? null,
+    baseURL = Core.readEnv('EDGEN_BASE_URL'),
+    apiKey = Core.readEnv('EDGEN_API_KEY'),
+    organization = Core.readEnv('EDGEN_ORG_ID') ?? null,
     ...opts
   }: ClientOptions = {}) {
     if (apiKey === undefined) {
@@ -114,12 +116,12 @@ export class edgen extends Core.APIClient {
       apiKey,
       organization,
       ...opts,
-      baseURL: baseURL || `http://127.0.0.1:33322/v1`,
+      baseURL: baseURL || `http://127.0.0.1:3000/v1`,
     };
 
     if (!options.dangerouslyAllowBrowser && Core.isRunningInBrowser()) {
-      throw new Errors.edgenError(
-        "It looks like you're running in a browser-like environment.\n\nThis is disabled by default, as it risks exposing your secret API credentials to attackers.\nIf you understand the risks and have appropriate mitigations in place,\nyou can set the `dangerouslyAllowBrowser` option to `true`, e.g.,\n\nnew edgen({ apiKey, dangerouslyAllowBrowser: true });",
+      throw new Errors.EdgenError(
+        "It looks like you're running in a browser-like environment.\n\nThis is disabled by default, as it risks exposing your secret API credentials to attackers.\nIf you understand the risks and have appropriate mitigations in place,\nyou can set the `dangerouslyAllowBrowser` option to `true`, e.g.,\n\nnew Edgen({ apiKey, dangerouslyAllowBrowser: true });",
       );
     }
 
@@ -148,7 +150,7 @@ export class edgen extends Core.APIClient {
   protected override defaultHeaders(opts: Core.FinalRequestOptions): Core.Headers {
     return {
       ...super.defaultHeaders(opts),
-      'edgen-Organization': this.organization,
+      'Edgen-Organization': this.organization,
       ...this._options.defaultHeaders,
     };
   }
@@ -157,9 +159,9 @@ export class edgen extends Core.APIClient {
     return { Authorization: `Bearer ${this.apiKey}` };
   }
 
-  static edgen = this;
+  static Edgen = this;
 
-  static edgenError = Errors.edgenError;
+  static EdgenError = Errors.EdgenError;
   static APIError = Errors.APIError;
   static APIConnectionError = Errors.APIConnectionError;
   static APIConnectionTimeoutError = Errors.APIConnectionTimeoutError;
@@ -175,7 +177,7 @@ export class edgen extends Core.APIClient {
 }
 
 export const {
-  edgenError,
+  EdgenError,
   APIError,
   APIConnectionError,
   APIConnectionTimeoutError,
@@ -193,7 +195,7 @@ export const {
 export import toFile = Uploads.toFile;
 export import fileFromPath = Uploads.fileFromPath;
 
-export namespace edgen {
+export namespace Edgen {
   // Helper functions
   export import toFile = Uploads.toFile;
   export import fileFromPath = Uploads.fileFromPath;
@@ -242,4 +244,4 @@ export namespace edgen {
   export import Audio = API.Audio;
 }
 
-export default edgen;
+export default Edgen;

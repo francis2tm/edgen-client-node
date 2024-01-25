@@ -1,6 +1,6 @@
-# edgen Node API Library
+# Edgen Node API Library
 
-This library provides convenient access to the edgen REST API from TypeScript or JavaScript.
+This library provides convenient access to the Edgen REST API from TypeScript or JavaScript.
 It is a fork of the official OpenAI Python library.
 
 The original library was generated from the [OpenAPI specification](https://github.com/openai/openai-openapi) with [Stainless](https://stainlessapi.com/).
@@ -19,10 +19,10 @@ The full API of this library can be found in [api.md file](api.md) along with ma
 
 <!-- prettier-ignore -->
 ```js
-import edgen from 'edgen';
+import Edgen from 'edgen';
 
-const edgen = new edgen({
-  baseURL: process.env['edgen_BASE_URL'], // This is the default and can be omitted
+const edgen = new Edgen({
+  baseURL: process.env['EDGEN_BASE_URL'], // This is the default and can be omitted
 });
 
 async function main() {
@@ -40,9 +40,9 @@ main();
 We provide support for streaming responses using Server Sent Events (SSE).
 
 ```ts
-import edgen from 'edgen';
+import Edgen from 'edgen';
 
-const edgen = new edgen();
+const edgen = new Edgen();
 
 async function main() {
   const stream = await edgen.chat.completions.create({
@@ -67,16 +67,16 @@ This library includes TypeScript definitions for all request params and response
 
 <!-- prettier-ignore -->
 ```ts
-import edgen from 'edgen';
+import Edgen from 'edgen';
 
-const edgen = new edgen();
+const edgen = new Edgen();
 
 async function main() {
-  const params: edgen.Chat.ChatCompletionCreateParams = {
+  const params: Edgen.Chat.ChatCompletionCreateParams = {
     messages: [{ role: 'user', content: 'Say this is a test' }],
     model: 'gpt-3.5-turbo',
   };
-  const chatCompletion: edgen.Chat.ChatCompletion = await edgen.chat.completions.create(params);
+  const chatCompletion: Edgen.Chat.ChatCompletion = await edgen.chat.completions.create(params);
 }
 
 main();
@@ -99,7 +99,7 @@ async function main() {
         model: 'gpt-3.5-turbo',
      })
     .catch((err) => {
-      if (err instanceof edgen.APIError) {
+      if (err instanceof Edgen.APIError) {
         console.log(err.status); // 400
         console.log(err.name); // BadRequestError
         console.log(err.headers); // {server: 'nginx', ...}
@@ -136,7 +136,7 @@ You can use the `maxRetries` option to configure or disable this:
 <!-- prettier-ignore -->
 ```js
 // Configure the default for all requests:
-const edgen = new edgen({
+const edgen = new Edgen({
   maxRetries: 0, // default is 2
 });
 
@@ -153,7 +153,7 @@ Requests time out after 10 minutes by default. You can configure this with a `ti
 <!-- prettier-ignore -->
 ```ts
 // Configure the default for all requests:
-const edgen = new edgen({
+const edgen = new Edgen({
   timeout: 20 * 1000, // 20 seconds (default is 10 minutes)
 });
 
@@ -175,13 +175,13 @@ By default, this library uses `node-fetch` in Node, and expects a global `fetch`
 
 If you would prefer to use a global, web-standards-compliant `fetch` function even in a Node environment,
 (for example, if you are running Node with `--experimental-fetch` or using NextJS which polyfills with `undici`),
-add the following import before your first import `from "edgen"`:
+add the following import before your first import `from "Edgen"`:
 
 ```ts
 // Tell TypeScript and the package to use the global web fetch instead of node-fetch.
 // Note, despite the name, this does not add any polyfills, but expects them to be provided if needed.
 import 'edgen/shims/web';
-import edgen from 'edgen';
+import Edgen from 'edgen';
 ```
 
 To do the inverse, add `import "edgen/shims/node"` (which does import polyfills).
@@ -192,9 +192,9 @@ which can be used to inspect or alter the `Request` or `Response` before/after e
 
 ```ts
 import { fetch } from 'undici'; // as one example
-import edgen from 'edgen';
+import Edgen from 'edgen';
 
-const client = new edgen({
+const client = new Edgen({
   fetch: async (url: RequestInfo, init?: RequestInfo): Promise<Response> => {
     console.log('About to make a request', url, init);
     const response = await fetch(url, init);

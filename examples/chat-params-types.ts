@@ -1,14 +1,14 @@
 #!/usr/bin/env -S npm run tsn -T
 
-import edgen from 'edgen';
+import Edgen from 'edgen';
 import { Stream } from 'edgen/streaming';
 
-const edgen = new edgen();
+const edgen = new Edgen();
 
 async function main() {
   // ---------------- Explicit non-streaming params ------------
 
-  const params: edgen.Chat.ChatCompletionCreateParams = {
+  const params: Edgen.Chat.ChatCompletionCreateParams = {
     model: 'gpt-4',
     messages: [{ role: 'user', content: 'Say this is a test!' }],
   };
@@ -17,7 +17,7 @@ async function main() {
 
   // ---------------- Explicit streaming params ----------------
 
-  const streamingParams: edgen.Chat.ChatCompletionCreateParams = {
+  const streamingParams: Edgen.Chat.ChatCompletionCreateParams = {
     model: 'gpt-4',
     messages: [{ role: 'user', content: 'Say this is a test!' }],
     stream: true,
@@ -31,12 +31,12 @@ async function main() {
 
   // ---------------- Explicit (non)streaming types ----------------
 
-  const params1: edgen.Chat.ChatCompletionCreateParamsNonStreaming = {
+  const params1: Edgen.Chat.ChatCompletionCreateParamsNonStreaming = {
     model: 'gpt-4',
     messages: [{ role: 'user', content: 'Say this is a test!' }],
   };
 
-  const params2: edgen.Chat.ChatCompletionCreateParamsStreaming = {
+  const params2: Edgen.Chat.ChatCompletionCreateParamsStreaming = {
     model: 'gpt-4',
     messages: [{ role: 'user', content: 'Say this is a test!' }],
     stream: true,
@@ -94,13 +94,13 @@ async function main() {
 // not the response will be streamed.
 export async function createCompletionParams(
   stream: true,
-): Promise<edgen.Chat.ChatCompletionCreateParamsStreaming>;
+): Promise<Edgen.Chat.ChatCompletionCreateParamsStreaming>;
 export async function createCompletionParams(
   stream: false,
-): Promise<edgen.Chat.ChatCompletionCreateParamsNonStreaming>;
+): Promise<Edgen.Chat.ChatCompletionCreateParamsNonStreaming>;
 export async function createCompletionParams(
   stream: boolean,
-): Promise<edgen.Chat.ChatCompletionCreateParams> {
+): Promise<Edgen.Chat.ChatCompletionCreateParams> {
   const params = {
     model: 'gpt-3.5-turbo',
     messages: [{ role: 'user' as const, content: 'Hello!' }],

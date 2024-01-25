@@ -1,3 +1,5 @@
+
+
 import * as Core from 'edgen/core';
 import { APIPromise } from 'edgen/core';
 import { APIResource } from 'edgen/resource';
@@ -265,7 +267,7 @@ export interface CompletionCreateParamsBase {
   top_p?: number | null;
 
   /**
-   * A unique identifier representing your end-user, which can help edgen to monitor
+   * A unique identifier representing your end-user, which can help Edgen to monitor
    * and detect abuse.
    */
   user?: string;

@@ -1,12 +1,12 @@
 #!/usr/bin/env -S npm run tsn -T
 
-import edgen from 'edgen';
+import Edgen from 'edgen';
 
-const edgen = new edgen();
+const edgen = new Edgen();
 
 async function main() {
   // Explicit streaming params type:
-  const streaming_params: edgen.Chat.CompletionCreateParams = {
+  const streaming_params: Edgen.Chat.CompletionCreateParams = {
     model: 'gpt-4',
     messages: [{ role: 'user', content: 'Say this is a test!' }],
     stream: true,

@@ -1,2 +1,6 @@
 export { Misc } from './misc';
-export { Version, edgenVersion } from './version';
+export {
+  Version,
+  EdgenVersion,
+} from './version';
+
